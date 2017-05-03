@@ -1,0 +1,23 @@
+{
+  "name": "neighborhood-map",
+  "version": "1.0.0",
+  "description": "Dev tools for the app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TodMcChesney/neighborhood-map.git"
+  },
+  "author": "Tod McChesney",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TodMcChesney/neighborhood-map/issues"
+  },
+  "homepage": "https://github.com/TodMcChesney/neighborhood-map#readme",
+  "devDependencies": {
+    "browser-sync": "^2.18.8",
+    "gulp": "^3.9.1"
+  }
+}
