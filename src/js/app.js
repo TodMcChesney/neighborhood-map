@@ -1,10 +1,11 @@
+/* exported initMap, errorMap */
 
-// This function initializes the map
-// It is called via the google maps api script tag in the html
+// Global variables
+var map;
+
+// Google Maps API script callback function that initializes the map
 function initMap() {
     'use strict';
-
-    var map;
 
     // Constructor to create a new map
     map = new google.maps.Map(document.getElementById('map'), {
@@ -14,4 +15,12 @@ function initMap() {
         },
         zoom: 12
     });
+}
+
+// Google Maps API script error handler function
+function errorMap() {
+    'use strict';
+
+    // Show alert box with error message if map doesn't load
+    window.alert('Unfortunately Google Maps did not load correctly. Please try refreshing your browser!');
 }
