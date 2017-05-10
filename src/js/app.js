@@ -2,6 +2,7 @@
 
 // Global variables
 var map;
+var markers = [];
 
 // Locations data model
 var model = [
@@ -54,6 +55,24 @@ function initMap() {
         },
         zoom: 12
     });
+
+    // Loop through data model and create an array of markers
+    var position;
+    var title;
+    var marker;
+    model.forEach(function(brewery, index) {
+        position = brewery.location;
+        title = brewery.title;
+        marker = new google.maps.Marker({
+            position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+            id: index
+        });
+        markers.push(marker);
+    });
+
+    console.log(markers);
 }
 
 // Google Maps API script error handler function
