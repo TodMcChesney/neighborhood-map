@@ -43,18 +43,9 @@ var model = [
     }
 ];
 
-// Google Maps API script callback function that initializes the map
-function initMap() {
+// ViewModel
+var ViewModel = function() {
     'use strict';
-
-    // Constructor to create a new map
-    map = new google.maps.Map(document.getElementById('map'), {
-        center: {
-            lat: 35.5951,
-            lng: -82.5515
-        },
-        zoom: 12
-    });
 
     // Loop through data model and create an array of markers
     var position;
@@ -72,7 +63,30 @@ function initMap() {
         markers.push(marker);
     });
 
-    console.log(markers);
+    // Extend the boundaries of the map for each marker and show it
+    var bounds = new google.maps.LatLngBounds();
+    markers.forEach(function(marker) {
+        marker.setMap(map);
+        bounds.extend(marker.position);
+    });
+    map.fitBounds(bounds);
+};
+
+// Google Maps API script callback function that initializes the map
+function initMap() {
+    'use strict';
+
+    // Constructor to create a new map
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 35.5951,
+            lng: -82.5515
+        },
+        zoom: 12
+    });
+
+    // Instantiate the ViewModel
+    ko.applyBindings(new ViewModel());
 }
 
 // Google Maps API script error handler function

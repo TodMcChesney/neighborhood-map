@@ -8,6 +8,7 @@
     "unused": true,
     "browser": true,
     "globals": {
-        "google": false
+        "google": false,
+        "ko": false
     }
 }
