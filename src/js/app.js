@@ -47,10 +47,27 @@ var model = [
 var ViewModel = function() {
     'use strict';
 
+    // This function populates the infowindow for the marker that was clicked
+    function populateInfoWindow(marker, infowindow) {
+
+        // Check to make sure the infowindow is not already open on this marker
+        if (infowindow.marker !== marker) {
+            infowindow.marker = marker;
+            infowindow.setContent('<div>' + marker.title + '</div>');
+            infowindow.open(map, marker);
+
+            // Clear the .marker property if the infowindow is closed
+            infowindow.addListener('closeclick', function() {
+                infowindow.marker = null;
+            });
+        }
+    }
+
     // Loop through data model and create an array of markers
     var position;
     var title;
     var marker;
+    var largeInfowindow = new google.maps.InfoWindow();
     model.forEach(function(brewery, index) {
         position = brewery.location;
         title = brewery.title;
@@ -61,6 +78,12 @@ var ViewModel = function() {
             id: index
         });
         markers.push(marker);
+
+        // Create click event listener to open infowindow for each marker
+        marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+        });
+
     });
 
     // Extend the boundaries of the map for each marker and show it
