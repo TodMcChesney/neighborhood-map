@@ -3,6 +3,7 @@
 // Global variables
 var map;
 var markers = [];
+var breweryList = ko.observableArray([]);
 
 // Locations data model
 var model = [
@@ -63,11 +64,14 @@ var ViewModel = function() {
         }
     }
 
-    // Loop through data model and create an array of markers
+    // Loop through data model to create list of brewery names and map markers
     var position;
     var title;
     var marker;
     var largeInfowindow = new google.maps.InfoWindow();
+    var BreweryName = function(data) {
+        this.title = ko.observable(data.title);
+    };
     model.forEach(function(brewery, index) {
         position = brewery.location;
         title = brewery.title;
@@ -77,13 +81,17 @@ var ViewModel = function() {
             animation: google.maps.Animation.DROP,
             id: index
         });
+
+        // Push marker to markers array
         markers.push(marker);
+
+        // Push brewery name to brewery list ko observableArray
+        breweryList.push(new BreweryName(brewery));
 
         // Create click event listener to open infowindow for each marker
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
         });
-
     });
 
     // Extend the boundaries of the map for each marker and show it
