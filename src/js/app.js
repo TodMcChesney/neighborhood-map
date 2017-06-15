@@ -47,7 +47,7 @@ var model = [
 var ViewModel = function() {
     'use strict';
 
-    // This function populates the infowindow for the marker that was clicked
+    // Populate the infowindow for the marker that was clicked
     var populateInfoWindow = function(marker, infowindow) {
 
         // Check to make sure the infowindow is not already open on this marker
@@ -95,10 +95,9 @@ var ViewModel = function() {
     });
     map.fitBounds(bounds);
 
-    // This function triggers the infowindow for the brewery list item that was clicked
-    this.breweryListClick = function(breweryData) {
-        console.log(breweryData);
-        google.maps.event.trigger(breweryData.marker, 'click');
+    // Trigger the marker click event to open the breweries infowindow
+    this.breweryNameClick = function(marker) {
+        google.maps.event.trigger(marker, 'click');
     };
 };
 
