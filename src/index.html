@@ -10,7 +10,7 @@
     </head>
     <body>
         <ul data-bind="foreach: breweryList">
-            <li data-bind="text: title"></li>
+            <li data-bind="text: title, click: $parent.breweryListClick"></li>
         </ul>
         <div id="map">
         </div>
