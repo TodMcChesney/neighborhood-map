@@ -47,6 +47,8 @@ var model = [
 var ViewModel = function() {
     'use strict';
 
+    var self = this;
+
     // Populate the infowindow for the marker that was clicked
     var populateInfoWindow = function(marker, infowindow) {
 
@@ -87,9 +89,39 @@ var ViewModel = function() {
         breweryList.push(marker);
     });
 
+    // Create filter observable
+    self.filter = ko.observable('');
+
+    // Filter breweries using the input filter text
+    this.filteredBreweryList = ko.computed(function() {
+        var filter = self.filter().toLowerCase();
+
+        // Reset breweryList markers to visible and close infowindows
+        breweryList().forEach(function(marker) {
+            marker.setVisible(true);
+            largeInfowindow.close();
+        });
+
+        // Return entire list of breweries if there is no filter text
+        if (!filter) {
+            return breweryList();
+
+        // Return only the breweries that match the filter text
+        } else {
+            return ko.utils.arrayFilter(breweryList(), function(brewery) {
+                if (brewery.title.toLowerCase().indexOf(filter) !== -1) {
+                    return true;
+                } else {
+                    brewery.setVisible(false);
+                    return false;
+                }
+            });
+        }
+    }, this);
+
     // Extend the boundaries of the map for each marker and show it
     var bounds = new google.maps.LatLngBounds();
-    breweryList().forEach(function(marker) {
+    this.filteredBreweryList().forEach(function(marker) {
         marker.setMap(map);
         bounds.extend(marker.position);
     });
