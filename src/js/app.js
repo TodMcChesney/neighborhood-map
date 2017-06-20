@@ -7,10 +7,45 @@ var breweryList = ko.observableArray([]);
 // Locations data model
 var model = [
     {
-        title: 'Sierra Nevada Brewery',
+        title: 'French Broad Brewery',
         location: {
-            lat: 35.430382,
-            lng: -82.548919
+            lat: 35.566290,
+            lng: -82.538671
+        }
+    },
+    {
+        title: 'Wedge Brewing Company',
+        location: {
+            lat: 35.586144,
+            lng: -82.566320
+        }
+    },
+    {
+        title: 'Bhramari Brewing Company',
+        location: {
+            lat: 35.591426,
+            lng: -82.552013
+        }
+    },
+    {
+        title: 'Hi-Wire Brewing',
+        location: {
+            lat: 35.591422,
+            lng: -82.555964
+        }
+    },
+    {
+        title: 'Asheville Brewing Company',
+        location: {
+            lat: 35.591721,
+            lng: -82.555311
+        }
+    },
+    {
+        title: 'Catawba Brewing Company',
+        location: {
+            lat: 35.565974,
+            lng: -82.539797
         }
     },
     {
