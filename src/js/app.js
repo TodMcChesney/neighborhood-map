@@ -115,14 +115,24 @@ var ViewModel = function() {
             id: index
         });
 
-        // Create click event listener to open infowindow for each marker
+        // Add click event listener to open infowindow and bounce marker
         marker.addListener('click', function() {
-            populateInfoWindow(this, largeInfowindow);
+            marker = this;
+            populateInfoWindow(marker, largeInfowindow);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function() {
+                marker.setAnimation(null);
+            }, 700);
         });
 
         // Push marker to brewery list ko observableArray
         breweryList.push(marker);
     });
+
+    // Trigger the marker click event when the brewery's name is clicked
+    this.breweryNameClick = function(marker) {
+        google.maps.event.trigger(marker, 'click');
+    };
 
     // Create filter observable
     self.filter = ko.observable('');
@@ -161,11 +171,6 @@ var ViewModel = function() {
         bounds.extend(marker.position);
     });
     map.fitBounds(bounds);
-
-    // Trigger the marker click event to open the breweries infowindow
-    this.breweryNameClick = function(marker) {
-        google.maps.event.trigger(marker, 'click');
-    };
 };
 
 // Google Maps API script callback function that initializes the map
