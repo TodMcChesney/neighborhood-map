@@ -14,7 +14,7 @@ var model = [
         }
     },
     {
-        title: 'L\'horloge fleurie',
+        title: 'L\'horloge Fleurie',
         location: {
             lat: 46.204192,
             lng: 6.150989
@@ -28,7 +28,7 @@ var model = [
         }
     },
     {
-        title: 'Bâtiment des Forces motrices',
+        title: 'Bâtiment des Forces Motrices',
         location: {
             lat: 46.204654,
             lng: 6.137087
@@ -42,7 +42,7 @@ var model = [
         }
     },
     {
-        title: 'Musée d\'Art et d\'Histoire(Geneva)',
+        title: 'Musée d\'Art et d\'Histoire (Geneva)',
         location: {
             lat: 46.199304,
             lng: 6.151574
@@ -90,8 +90,35 @@ var ViewModel = function() {
         // Check to make sure the infowindow is not already open on this marker
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
-            infowindow.setContent('<div>' + marker.title + '</div>');
+            infowindow.setContent('<h3>Loading please wait...</h3>');
             infowindow.open(map, marker);
+
+            // Wikipedia API AJAX request
+            var wikiInfo;
+            var wikiLink;
+            var wikiUrl = 'https://en.wikipedia.org/w/api.php';
+            var wikiRequestTimeout = setTimeout(function() {
+                infowindow.setContent('<h3>' + marker.title + '</h3>' +
+                '<p>Unfortunately more information on ' + marker.title +
+                ' was unavailable from Wikipedia.</p>');
+            }, 3000);
+            $.ajax({
+                url: wikiUrl,
+                data: {
+                    action: 'opensearch',
+                    search: marker.title,
+                    format: 'json'
+                },
+                dataType: 'jsonp',
+                success: function(data) {
+                    wikiInfo = data[2][0];
+                    wikiLink = data[3][0];
+                    clearTimeout(wikiRequestTimeout);
+                    infowindow.setContent('<h3>' + marker.title + '</h3>' +
+                    '<p>' + wikiInfo + '</p>' + '<a href="' + wikiLink +
+                    '" target="_blank" >Read more on Wikipedia</a>');
+                }
+            });
 
             // Clear the .marker property if the infowindow is closed
             infowindow.addListener('closeclick', function() {
