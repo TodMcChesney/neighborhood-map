@@ -9,6 +9,7 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
+        <h1>Historic Places in Geneva</h1>
         <input data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
         <ul data-bind="foreach: filteredPlacesList">
             <li data-bind="text: title, click: $parent.placeNameClick"></li>
