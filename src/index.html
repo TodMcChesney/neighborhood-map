@@ -9,9 +9,9 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
-        <input data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter breweries by name">
-        <ul data-bind="foreach: filteredBreweryList">
-            <li data-bind="text: title, click: $parent.breweryNameClick"></li>
+        <input data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
+        <ul data-bind="foreach: filteredPlacesList">
+            <li data-bind="text: title, click: $parent.placeNameClick"></li>
         </ul>
         <div id="map">
         </div>

@@ -2,78 +2,78 @@
 
 // Global variables
 var map;
-var breweryList = ko.observableArray([]);
+var placesList = ko.observableArray([]);
 
-// Locations data model
+// Places data model
 var model = [
     {
-        title: 'French Broad Brewery',
+        title: 'Jet d\'Eau',
         location: {
-            lat: 35.566290,
-            lng: -82.538671
+            lat: 46.207389,
+            lng: 6.155903
         }
     },
     {
-        title: 'Wedge Brewing Company',
+        title: 'L\'horloge fleurie',
         location: {
-            lat: 35.586144,
-            lng: -82.566320
+            lat: 46.204192,
+            lng: 6.150989
         }
     },
     {
-        title: 'Bhramari Brewing Company',
+        title: 'Brunswick Monument',
         location: {
-            lat: 35.591426,
-            lng: -82.552013
+            lat: 46.208445,
+            lng: 6.148912
         }
     },
     {
-        title: 'Hi-Wire Brewing',
+        title: 'Bâtiment des Forces motrices',
         location: {
-            lat: 35.591422,
-            lng: -82.555964
+            lat: 46.204654,
+            lng: 6.137087
         }
     },
     {
-        title: 'Asheville Brewing Company',
+        title: 'St. Pierre Cathedral',
         location: {
-            lat: 35.591721,
-            lng: -82.555311
+            lat: 46.201127,
+            lng: 6.148516
         }
     },
     {
-        title: 'Catawba Brewing Company',
+        title: 'Musée d\'Art et d\'Histoire(Geneva)',
         location: {
-            lat: 35.565974,
-            lng: -82.539797
+            lat: 46.199304,
+            lng: 6.151574
         }
     },
     {
-        title: 'New Belgium Brewery',
+        title: 'Musée d\'ethnographie de Genève',
         location: {
-            lat: 35.586875,
-            lng: -82.572707
+            lat: 46.197954,
+            lng: 6.137029
         }
     },
     {
-        title: 'Wicked Weed Brewing Pub',
+        title: 'Beth Yaakov Synagogue',
         location: {
-            lat: 35.591683,
-            lng: -82.551126
+            lat: 46.202830,
+            lng: 6.141020
         }
     },
     {
-        title: 'Burial Beer Company',
+        title: 'Basilica of Our Lady of Geneva',
         location: {
-            lat: 35.588049,
-            lng: -82.553796
+            lat: 46.208759,
+            lng: 6.142055
         }
     },
     {
-        title: 'Green Man Brewery',
+        title: 'Reformation Wall',
         location: {
-            lat: 35.588720,
-            lng: -82.553007
+            lat: 46.200272,
+            lng: 6.145850
         }
     }
 ];
@@ -100,14 +100,14 @@ var ViewModel = function() {
         }
     };
 
-    // Loop through data model to create list of breweries and map markers
+    // Loop through data model to create list of places and map markers
     var position;
     var title;
     var marker;
     var largeInfowindow = new google.maps.InfoWindow();
-    model.forEach(function(brewery, index) {
-        position = brewery.location;
-        title = brewery.title;
+    model.forEach(function(place, index) {
+        position = place.location;
+        title = place.title;
         marker = new google.maps.Marker({
             position: position,
             title: title,
@@ -125,39 +125,39 @@ var ViewModel = function() {
             }, 700);
         });
 
-        // Push marker to brewery list ko observableArray
-        breweryList.push(marker);
+        // Push marker to placesList ko observableArray
+        placesList.push(marker);
     });
 
-    // Trigger the marker click event when the brewery's name is clicked
-    this.breweryNameClick = function(marker) {
+    // Trigger the marker click event when the place's name is clicked
+    this.placeNameClick = function(marker) {
         google.maps.event.trigger(marker, 'click');
     };
 
     // Create filter observable
     self.filter = ko.observable('');
 
-    // Filter breweries using the input filter text
-    this.filteredBreweryList = ko.computed(function() {
+    // Filter places using the input filter text
+    this.filteredPlacesList = ko.computed(function() {
         var filter = self.filter().toLowerCase();
 
-        // Reset breweryList markers to visible and close infowindows
-        breweryList().forEach(function(marker) {
+        // Reset placesList markers to visible and close infowindows
+        placesList().forEach(function(marker) {
             marker.setVisible(true);
             largeInfowindow.close();
         });
 
-        // Return entire list of breweries if there is no filter text
+        // Return entire list of places if there is no filter text
         if (!filter) {
-            return breweryList();
+            return placesList();
 
-        // Return only the breweries that match the filter text
+        // Return only the places that match the filter text
         } else {
-            return ko.utils.arrayFilter(breweryList(), function(brewery) {
-                if (brewery.title.toLowerCase().indexOf(filter) !== -1) {
+            return ko.utils.arrayFilter(placesList(), function(place) {
+                if (place.title.toLowerCase().indexOf(filter) !== -1) {
                     return true;
                 } else {
-                    brewery.setVisible(false);
+                    place.setVisible(false);
                     return false;
                 }
             });
@@ -166,7 +166,7 @@ var ViewModel = function() {
 
     // Extend the boundaries of the map for each marker and show it
     var bounds = new google.maps.LatLngBounds();
-    this.filteredBreweryList().forEach(function(marker) {
+    this.filteredPlacesList().forEach(function(marker) {
         marker.setMap(map);
         bounds.extend(marker.position);
     });
@@ -180,8 +180,8 @@ function initMap() {
     // Constructor to create a new map
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 35.5951,
-            lng: -82.5515
+            lat: 46.204391,
+            lng: 6.143158
         },
         zoom: 12
     });
