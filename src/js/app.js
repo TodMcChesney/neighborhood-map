@@ -87,13 +87,13 @@ var ViewModel = function() {
     // Populate the infowindow for the marker that was clicked
     var populateInfoWindow = function(marker, infowindow) {
 
-        // Check to make sure the infowindow is not already open on this marker
+        // If the infowindow is not already open on this marker open it
         if (infowindow.marker !== marker) {
             infowindow.marker = marker;
             infowindow.setContent('<h3>Loading please wait...</h3>');
             infowindow.open(map, marker);
 
-            // Wikipedia API AJAX request
+            // Load Wikipedia data via AJAX and update infowindow content
             var wikiInfo;
             var wikiLink;
             var wikiUrl = 'https://en.wikipedia.org/w/api.php';
