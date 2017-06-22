@@ -131,7 +131,9 @@ var ViewModel = function() {
     var position;
     var title;
     var marker;
-    var largeInfowindow = new google.maps.InfoWindow();
+    var smallInfoWindow = new google.maps.InfoWindow({
+        maxWidth: 280
+    });
     model.forEach(function(place, index) {
         position = place.location;
         title = place.title;
@@ -145,7 +147,7 @@ var ViewModel = function() {
         // Add click event listener to open infowindow and bounce marker
         marker.addListener('click', function() {
             marker = this;
-            populateInfoWindow(marker, largeInfowindow);
+            populateInfoWindow(marker, smallInfoWindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
                 marker.setAnimation(null);
@@ -171,7 +173,7 @@ var ViewModel = function() {
         // Reset placesList markers to visible and close infowindows
         placesList().forEach(function(marker) {
             marker.setVisible(true);
-            largeInfowindow.close();
+            smallInfoWindow.close();
         });
 
         // Return entire list of places if there is no filter text
