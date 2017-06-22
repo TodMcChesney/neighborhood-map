@@ -44,3 +44,21 @@ body {
     text-align: right;
     font-size: 1.8em;
 }
+
+.filter {
+    width: 100%;
+}
+.list {
+    padding-left: 0;
+}
+
+.place {
+    margin-left: 0;
+    padding: 10px 20px;
+    list-style: none;
+    cursor: pointer;
+}
+
+.place:hover {
+    background-color: #000;
+}

@@ -12,9 +12,9 @@
         <a id="nav-icon"></a>
         <div class="list-view">
             <h1 class="heading">Historic Geneva</h1>
-            <input data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
-            <ul data-bind="foreach: filteredPlacesList">
-                <li data-bind="text: title, click: $parent.placeNameClick"></li>
+            <input class="filter" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
+            <ul class="list" data-bind="foreach: filteredPlacesList">
+                <li class="place" data-bind="text: title, click: $parent.placeNameClick"></li>
             </ul>
         </div>
         <div id="map">
