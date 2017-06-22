@@ -1,8 +1,7 @@
 /* exported initMap, errorMap */
 
-// Global variables
+// Global map variable
 var map;
-var placesList = ko.observableArray([]);
 
 // Places data model
 var model = [
@@ -128,6 +127,7 @@ var ViewModel = function() {
     };
 
     // Loop through data model to create list of places and map markers
+    var placesList = ko.observableArray([]);
     var position;
     var title;
     var marker;
