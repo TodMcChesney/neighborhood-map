@@ -132,7 +132,7 @@ var ViewModel = function() {
     var title;
     var marker;
     var smallInfoWindow = new google.maps.InfoWindow({
-        maxWidth: 280
+        maxWidth: 160
     });
     model.forEach(function(place, index) {
         position = place.location;
@@ -147,6 +147,7 @@ var ViewModel = function() {
         // Add click event listener to open infowindow and bounce marker
         marker.addListener('click', function() {
             marker = this;
+            map.setCenter(marker.getPosition());
             populateInfoWindow(marker, smallInfoWindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
