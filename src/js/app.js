@@ -212,7 +212,8 @@ function initMap() {
             lat: 46.204391,
             lng: 6.143158
         },
-        zoom: 12
+        zoom: 12,
+        mapTypeControl: false
     });
 
     // Instantiate the ViewModel
