@@ -111,6 +111,9 @@ var ViewModel = function() {
                 dataType: 'jsonp',
                 success: function(data) {
                     wikiInfo = data[2][0];
+                        if (wikiInfo.length > 150) {
+                            wikiInfo = wikiInfo.slice(0, 147) + '...';
+                        }
                     wikiLink = data[3][0];
                     clearTimeout(wikiRequestTimeout);
                     infowindow.setContent('<h3>' + marker.title + '</h3>' +
