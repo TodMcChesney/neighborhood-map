@@ -16,6 +16,7 @@
             <ul class="list" data-bind="foreach: filteredPlacesList">
                 <li class="place" data-bind="text: title, click: $parent.placeNameClick"></li>
             </ul>
+            <p class="place center border" data-bind="click: recenterMap">Recenter Map</p>
         </div>
         <div id="map">
         </div>

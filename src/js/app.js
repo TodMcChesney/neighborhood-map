@@ -205,6 +205,10 @@ var ViewModel = function() {
     });
     map.fitBounds(bounds);
 
+    this.recenterMap = function() {
+        map.setCenter(new google.maps.LatLng(46.203356,6.146466));
+    };
+
     // Create showListView observable
     self.showListView = ko.observable(true);
 
@@ -234,8 +238,8 @@ function initMap() {
     // Constructor to create a new map
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            lat: 46.204391,
-            lng: 6.143158
+            lat: 46.203356,
+            lng: 6.146466
         },
         zoom: 12,
         mapTypeControl: false
