@@ -204,6 +204,27 @@ var ViewModel = function() {
         bounds.extend(marker.position);
     });
     map.fitBounds(bounds);
+
+    // Create showListView observable
+    self.showListView = ko.observable(true);
+
+    // Toggle showListView true/false function
+    this.toggleListView = function() {
+        self.showListView(!self.showListView());
+    };
+
+    // Custom KO binding that shows/hides elements via jQuery
+    ko.bindingHandlers.fadeVisible = {
+        update: function(element, valueAccessor) {
+            // Whenever the value changes, fade the element in or out
+            var value = ko.unwrap(valueAccessor());
+            if (value === true) {
+                $(element).fadeIn();
+            } else {
+                $(element).fadeOut();
+            }
+        }
+    };
 };
 
 // Google Maps API script callback function that initializes the map

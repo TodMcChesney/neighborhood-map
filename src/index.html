@@ -9,8 +9,8 @@
         <link href="css/styles.css" rel="stylesheet">
     </head>
     <body>
-        <a id="nav-icon"></a>
-        <div class="list-view">
+        <nav id="nav-icon" data-bind="click: toggleListView"></nav>
+        <div class="list-view" data-bind="fadeVisible: showListView">
             <h1 class="heading">Historic Geneva</h1>
             <input class="filter" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
             <ul class="list" data-bind="foreach: filteredPlacesList">
