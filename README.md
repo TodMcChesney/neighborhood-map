@@ -1,6 +1,12 @@
 # Neighborhood Map App
 
-This is my version of Project #5 for the Front-End Web Developer Nanodegree.
+This is my version of Project #5 for the Front-End Web Developer
+Nanodegree. I used the Google Maps API to generate the map and the
+Wikipedia API to get data for each location.
+
+The live version can be viewed here:
+
+[https://todmcchesney.github.io/neighborhood-map/](https://todmcchesney.github.io/neighborhood-map/)
 
 ## Getting Started
 
@@ -26,6 +32,15 @@ This will install gulp locally with all the necessary modules.
 This task spins up a localhost server, and watches all files for changes
 . BrowserSync automatically opens the index.html page and refreshes
 the site after any changes are saved.
+
+### Building Production Code
+
+```$ gulp build```
+
+This task cleans the dist folder first by deleting any old contents.
+Then the js, css, and html files are minified and all files are copied
+over to the clean dist folder. Links the js and css are updated to the
+.min versions in the html.
 
 ## License
 MIT
