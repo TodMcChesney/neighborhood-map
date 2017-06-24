@@ -8,6 +8,7 @@ const cssnano = require('gulp-cssnano');
 const rename = require('gulp-rename');
 const processhtml = require('gulp-processhtml');
 const htmlmin = require('gulp-htmlmin');
+const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
 
@@ -44,12 +45,13 @@ gulp.task('clean:dist', () =>
 
 // minify:js
 gulp.task('minify:js', ['clean:dist'], () =>
-gulp.src('src/js/*.js')
-.pipe(uglify())
-.pipe(rename({
-    suffix: '.min'
-}))
-.pipe(gulp.dest('dist/js'))
+    gulp.src(['src/js/knockout-3.4.2.js', 'src/js/jquery-3.2.1.min.js', 'src/js/*.js'])
+    .pipe(concat('all.js'))
+    .pipe(uglify())
+    .pipe(rename({
+        suffix: '.min'
+    }))
+    .pipe(gulp.dest('dist/js'))
 );
 
 // minify:css
