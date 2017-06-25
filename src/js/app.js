@@ -147,7 +147,7 @@ var ViewModel = function() {
         // Add click event listener to open infowindow and bounce marker
         marker.addListener('click', function() {
             marker = this;
-            map.setCenter(marker.getPosition());
+            map.panTo(marker.getPosition());
             populateInfoWindow(marker, smallInfoWindow);
             marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
@@ -203,7 +203,7 @@ var ViewModel = function() {
     map.fitBounds(bounds);
 
     this.recenterMap = function() {
-        map.setCenter(new google.maps.LatLng(46.203356,6.146466));
+        map.panTo(new google.maps.LatLng(46.203356,6.146466));
     };
 
     // Create showListView observable
