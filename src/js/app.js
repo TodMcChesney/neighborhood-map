@@ -96,11 +96,6 @@ var ViewModel = function() {
             var wikiInfo;
             var wikiLink;
             var wikiUrl = 'https://en.wikipedia.org/w/api.php';
-            var wikiRequestTimeout = setTimeout(function() {
-                infowindow.setContent('<h3>' + marker.title + '</h3>' +
-                '<p>Unfortunately more information on ' + marker.title +
-                ' was unavailable from Wikipedia.</p>');
-            }, 3000);
             $.ajax({
                 url: wikiUrl,
                 data: {
@@ -108,18 +103,20 @@ var ViewModel = function() {
                     search: marker.title,
                     format: 'json'
                 },
-                dataType: 'jsonp',
-                success: function(data) {
-                    wikiInfo = data[2][0];
-                        if (wikiInfo.length > 150) {
-                            wikiInfo = wikiInfo.slice(0, 147) + '...';
-                        }
-                    wikiLink = data[3][0];
-                    clearTimeout(wikiRequestTimeout);
-                    infowindow.setContent('<h3>' + marker.title + '</h3>' +
-                    '<p>' + wikiInfo + '</p>' + '<a href="' + wikiLink +
-                    '" target="_blank" >Read more on Wikipedia</a>');
-                }
+                dataType: 'jsonp'
+            }).done(function(data) {
+                wikiInfo = data[2][0];
+                    if (wikiInfo.length > 150) {
+                        wikiInfo = wikiInfo.slice(0, 147) + '...';
+                    }
+                wikiLink = data[3][0];
+                infowindow.setContent('<h3>' + marker.title + '</h3>' +
+                '<p>' + wikiInfo + '</p>' + '<a href="' + wikiLink +
+                '" target="_blank" >Read more on Wikipedia</a>');
+            }).fail(function() {
+                infowindow.setContent('<h3>' + marker.title + '</h3>' +
+                '<p>Unfortunately more information on ' + marker.title +
+                ' was unavailable from Wikipedia.</p>');
             });
 
             // Clear the .marker property if the infowindow is closed
