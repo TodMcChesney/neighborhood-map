@@ -1,16 +1,8 @@
 /* exported initMap, errorMap */
 
-// Global map variable
+// Globals
 var map;
-
-// Get JSON Places data and create model
-var model = [];
-$.getJSON('js/places.json', function(data) {
-    'use strict';
-    data.places.forEach(function(place) {
-        model.push(place);
-    });
-});
+var model;
 
 // ViewModel
 var ViewModel = function() {
@@ -69,7 +61,7 @@ var ViewModel = function() {
     var smallInfoWindow = new google.maps.InfoWindow({
         maxWidth: 160
     });
-    model.forEach(function(place, index) {
+    model.places.forEach(function(place, index) {
         position = place.location;
         title = place.title;
         marker = new google.maps.Marker({
@@ -152,6 +144,7 @@ var ViewModel = function() {
     // Custom KO binding that shows/hides elements via jQuery
     ko.bindingHandlers.fadeVisible = {
         update: function(element, valueAccessor) {
+
             // Whenever the value changes, fade the element in or out
             var value = ko.unwrap(valueAccessor());
             if (value === true) {
@@ -162,6 +155,24 @@ var ViewModel = function() {
         }
     };
 };
+
+// Load Places data
+function loadData() {
+    'use strict';
+
+    // Load Places JSON data via AJAX and update model
+    $.getJSON('js/places.json', function(data) {
+        model = data;
+    }).done(function() {
+
+        // Instantiate the ViewModel after data is done loading
+        ko.applyBindings(new ViewModel());
+    }).fail(function() {
+
+        // Show alert box with error message if data fails to load
+        window.alert('Unfortunately the Places data did not load correctly. Please try refreshing your browser!');
+    });
+}
 
 // Google Maps API script callback function that initializes the map
 function initMap() {
@@ -177,8 +188,8 @@ function initMap() {
         mapTypeControl: false
     });
 
-    // Instantiate the ViewModel
-    ko.applyBindings(new ViewModel());
+    // Call function to load Places data
+    loadData();
 }
 
 // Google Maps API script error handler function
