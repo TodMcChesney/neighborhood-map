@@ -10,6 +10,8 @@ const processhtml = require('gulp-processhtml');
 const htmlmin = require('gulp-htmlmin');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
+const util = require('gulp-util');
+const jsonMinify = require('gulp-json-minify');
 
 
 // Running dev tasks from the CLI:
@@ -29,6 +31,7 @@ gulp.task('default', ['browserSync'], () => {
     gulp.watch('src/css/styles.css', browserSync.reload);
     gulp.watch('src/img/*.+(png|jpg|svg)', browserSync.reload);
     gulp.watch('src/js/*.js', browserSync.reload);
+    gulp.watch('src/js/*.json', browserSync.reload);
     gulp.watch('src/index.html', browserSync.reload);
 });
 
@@ -54,6 +57,14 @@ gulp.task('minify:js', ['clean:dist'], () =>
     .pipe(gulp.dest('dist/js'))
 );
 
+// minify:json
+gulp.task('minify:json', ['clean:dist'], () =>
+    gulp.src('src/js/*.json')
+    .pipe(jsonMinify())
+    .pipe(gulp.dest('dist/js'))
+    .on('error', util.log)
+);
+
 // minify:css
 gulp.task('minify:css', ['clean:dist'], () =>
     gulp.src('src/css/styles.css')
@@ -76,11 +87,11 @@ gulp.task('minify:html', ['clean:dist'], () =>
 
 // copy
 gulp.task('copy', ['clean:dist'], () =>
-    gulp.src(['src/js/lib/*.js', 'src/img/**/*.+(png|jpg|svg)', 'src/*.!(html)'], {
+    gulp.src(['src/img/**/*.+(png|jpg|svg)', 'src/*.!(html)'], {
         base: 'src'
     })
     .pipe(gulp.dest('dist'))
 );
 
 // build
-gulp.task('build', ['clean:dist', 'minify:js', 'minify:css', 'minify:html', 'copy']);
+gulp.task('build', ['clean:dist', 'minify:js', 'minify:json', 'minify:css', 'minify:html', 'copy']);
