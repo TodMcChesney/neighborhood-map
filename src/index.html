@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html class="doc" lang="en-US">
     <head>
         <meta charset="utf-8">
         <title>Neighborhood Map App | Tod McChesney</title>
@@ -11,8 +11,8 @@
         <!-- /build -->
         <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     </head>
-    <body>
-        <nav id="nav-icon" data-bind="click: toggleListView"></nav>
+    <body class="page">
+        <nav class="nav-icon" data-bind="click: toggleListView"></nav>
         <div class="list-view" data-bind="fadeVisible: showListView">
             <h1 class="heading">Historic Geneva</h1>
             <input class="filter" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
@@ -21,7 +21,7 @@
             </ul>
             <p class="place center border" data-bind="click: recenterMap">Recenter Map</p>
         </div>
-        <div id="map">
+        <div id="map" class="map">
         </div>
         <!-- build:js js/all.min.js -->
         <script src="js/knockout-3.4.2.js"></script>
