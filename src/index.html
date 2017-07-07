@@ -12,15 +12,17 @@
         <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
     </head>
     <body class="page page__text">
-        <nav class="list-view__icon" data-bind="click: toggleListView"></nav>
-        <div class="list-view" data-bind="fadeVisible: showListView">
-            <h1 class="list-view__heading">Historic Geneva</h1>
-            <input class="list-view__filter" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
-            <ul class="list-view__list" data-bind="foreach: filteredPlacesList">
-                <li class="list-view__item" data-bind="text: title, click: $parent.placeNameClick"></li>
-            </ul>
-            <p class="list-view__item list-view__item--border page__text--center" data-bind="click: recenterMap">Recenter Map</p>
-        </div>
+        <nav class="nav">
+            <a href="#" class="nav__icon" data-bind="click: toggleNavView"></a>
+            <div class="nav__view" data-bind="fadeVisible: showNavView">
+                <h1 class="nav__heading">Historic Geneva</h1>
+                <input class="nav__filter" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter places by name">
+                <ul class="nav__list" data-bind="foreach: filteredPlacesList">
+                    <li class="nav__item"><a href="#" class="nav__link" data-bind="text: title, click: $parent.placeNameClick"></a></li>
+                </ul>
+                <p class="nav__item nav__item--border page__text--center"><a href="#" class="nav__link" data-bind="click: recenterMap">Recenter Map</a></p>
+            </div>
+        </nav>
         <div id="map" class="map">
         </div>
         <!-- build:js js/all.min.js -->

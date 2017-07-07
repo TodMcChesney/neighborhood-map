@@ -133,12 +133,12 @@ var ViewModel = function() {
         map.panTo(new google.maps.LatLng(46.203356,6.146466));
     };
 
-    // Create showListView observable
-    self.showListView = ko.observable(true);
+    // Create showNavView observable
+    self.showNavView = ko.observable(true);
 
-    // Toggle showListView true/false function
-    this.toggleListView = function() {
-        self.showListView(!self.showListView());
+    // Toggle showNavView true/false function
+    this.toggleNavView = function() {
+        self.showNavView(!self.showNavView());
     };
 
     // Custom KO binding that shows/hides elements via jQuery
