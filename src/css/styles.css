@@ -1,9 +1,6 @@
-.doc,
-.page {
+.doc {
     height: 100%;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 *,
@@ -12,11 +9,17 @@
     box-sizing: inherit;
 }
 
-.text {
+.page {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page__text {
     font-family: serif;
 }
 
-.text--center {
+.page__text--center {
     text-align: center;
 }
 
