@@ -4,6 +4,8 @@ This is my version of Project #5 for the Front-End Web Developer
 Nanodegree. I used the Google Maps API to generate the map and the
 Wikipedia API to get data for each location.
 
+![screenshot](/screenshot.png)
+
 The live version can be viewed here:
 
 [https://todmcchesney.github.io/neighborhood-map/](https://todmcchesney.github.io/neighborhood-map/)
